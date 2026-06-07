@@ -57,18 +57,6 @@ function setButtonLoading(button, isLoading, defaultText, loadingText) {
     button.textContent = defaultText;
     button.disabled = false;
   }
-}
-
-function handleLikeClick(cardId, likeButton, likeCountSpan) {
-  const isLiked = likeButton.classList.contains('card__like-button_is-active');
-  changeLike(cardId, isLiked)
-    .then(updatedCard => {
-      likeButton.classList.toggle('card__like-button_is-active');
-      likeCountSpan.textContent = updatedCard.likes.length;
-    })
-    .catch(err => console.error('Ошибка при лайке:', err));
-}
-
 function handleDeleteClick(cardElement, cardId) {
   openModal(removeModal);
   removeForm.dataset.cardId = cardId;
