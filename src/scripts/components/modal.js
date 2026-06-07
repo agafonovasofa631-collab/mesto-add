@@ -27,3 +27,26 @@ export const setCloseModalWindowEventListeners = (modalWindow) => {
     }
   });
 }
+// src/scripts/components/modal.js
+export function openModal(modal) {
+  modal.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closeByEscape);
+  modal.addEventListener('click', closeByOverlay);
+}
+
+export function closeModal(modal) {
+  modal.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', closeByEscape);
+  modal.removeEventListener('click', closeByOverlay);
+}
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    if (openedPopup) closeModal(openedPopup);
+  }
+}
+
+function closeByOverlay(evt) {
+  if (evt.target === evt.currentTarget) closeModal(evt.currentTarget);
+}

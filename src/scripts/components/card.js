@@ -40,3 +40,14 @@ export const createCardElement = (
 
   return cardElement;
 };
+export function isCardLiked(likeButton) {
+  return likeButton.classList.contains('card__like-button_is-active');
+}
+export function updateLikeUI(likeButton, likeCountSpan, isLiked, likesCount) {
+  if (isLiked) {
+    likeButton.classList.add('card__like-button_is-active');
+  } else {
+    likeButton.classList.remove('card__like-button_is-active');
+  }
+  likeCountSpan.textContent = likesCount;
+}
