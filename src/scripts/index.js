@@ -1,5 +1,5 @@
 // src/scripts/index.js
-
+import { isCardLiked, updateLikeUI } from './components/card.js';
 import './styles/index.css';
 import {
   getUserInfo,
