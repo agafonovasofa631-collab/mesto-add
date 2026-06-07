@@ -250,29 +250,18 @@ cardForm.addEventListener('submit', handleAddCardSubmit);
 enableValidation(validationConfig);
 import { isCardLiked, updateLikeUI } from './components/card.js';
 
-function handleLikeClick(cardId, likeButton, likeCountSpan) {
-  const isLikedNow = isCardLiked(likeButton);
-  changeLike(cardId, isLikedNow)
-    .then(updatedCard => {
-      updateLikeUI(likeButton, likeCountSpan, !isLikedNow, updatedCard.likes.length);
-    })
-    .catch(err => console.error('Ошибка при лайке:', err));
-}
-import { isCardLiked, updateLikeUI } from './components/card.js';
-
-function handleLikeClick(cardId, likeButton, likeCountSpan) {
-  const isCurrentlyLiked = isCardLiked(likeButton);
-  changeLike(cardId, isCurrentlyLiked)
-    .then(updatedCard => {
-      updateLikeUI(likeButton, likeCountSpan, updatedCard.likes.length, !isCurrentlyLiked);
-    })
-    .catch(err => console.error('Ошибка при лайке:', err));
-}
-
-
 function handleImageClick(link, name) {
   popupImage.src = link;
   popupImage.alt = name;
   popupCaption.textContent = name;
   openModal(imageModal);
+}
+function handleLikeClick(cardId, likeButton, likeCountSpan) {
+  const isLiked = likeButton.classList.contains('card__like-button_is-active');
+  changeLike(cardId, isLiked)
+    .then(updatedCard => {
+      likeButton.classList.toggle('card__like-button_is-active');
+      likeCountSpan.textContent = updatedCard.likes.length;
+    })
+    .catch(err => console.error('Ошибка при лайке:', err));
 }
