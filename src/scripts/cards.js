@@ -1,3 +1,4 @@
+import './styles/index.css';
 export const initialCards = [
     {
       name: "Архыз",
