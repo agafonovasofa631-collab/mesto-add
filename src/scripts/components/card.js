@@ -43,3 +43,6 @@ export function updateLikeUI(likeButton, likeCountSpan, likesCount, isLiked) {
   }
   likeCountSpan.textContent = likesCount;
 }
+export function removeCardElement(cardElement) {
+  cardElement.remove();
+}
