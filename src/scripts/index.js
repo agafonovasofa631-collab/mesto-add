@@ -1,6 +1,4 @@
 // src/scripts/index.js
-
-import './styles/index.css';
 import {
   getUserInfo,
   getCards,
