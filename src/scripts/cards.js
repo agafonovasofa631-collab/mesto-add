@@ -24,9 +24,6 @@ export const initialCards = [
       link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
     },
 ];
-
-
-// Функция создания карточки
 export function createCard(cardData, currentUserId, handleLikeClick, handleDeleteClick, handleImageClick, handleInfoClick) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.cloneNode(true);
@@ -60,12 +57,10 @@ export function createCard(cardData, currentUserId, handleLikeClick, handleDelet
   return cardElement;
 }
 
-// Функция проверки статуса лайка
 export function isCardLiked(likeButton) {
   return likeButton.classList.contains('card__like-button_is-active');
 }
 
-// Функция обновления UI лайка
 export function updateLikeUI(likeButton, likeCountSpan, likesCount, isLiked) {
   if (isLiked) {
     likeButton.classList.add('card__like-button_is-active');
