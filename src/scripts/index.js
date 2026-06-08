@@ -89,7 +89,8 @@ function handleRemoveConfirm(evt) {
   if (!cardId || !cardElement) return;
   setButtonLoading(confirmRemoveBtn, true, 'Да', 'Удаление...');
   deleteCard(cardId)
-    .then(() => 
+    .then(() => {
+      removeCardElement(cardElement);   // 👈 заменили
       closeModal(removeModal);
     })
     .catch(err => console.error('Ошибка удаления:', err))
