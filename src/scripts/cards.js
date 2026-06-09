@@ -1,4 +1,4 @@
-
+import { createCard, isCardLiked, updateLikeUI, removeCardElement } from './components/card.js';
 export const initialCards = [
     {
       name: "Архыз",
@@ -41,6 +41,7 @@ export function createCard(cardData, currentUserId, handleLikeClick, handleDelet
   cardTitle.textContent = cardData.name;
   likeCountSpan.textContent = cardData.likes.length;
 
+  
   const isLiked = cardData.likes.some(user => user._id === currentUserId);
   if (isLiked) likeButton.classList.add('card__like-button_is-active');
 
@@ -68,4 +69,7 @@ export function updateLikeUI(likeButton, likeCountSpan, likesCount, isLiked) {
     likeButton.classList.remove('card__like-button_is-active');
   }
   likeCountSpan.textContent = likesCount;
+}
+export function removeCardElement(cardElement) {
+  cardElement.remove();
 }
