@@ -68,7 +68,7 @@ export function updateLikeUI(likeButton, likeCountSpan, likesCount, isLiked) {
   } else {
     likeButton.classList.remove('card__like-button_is-active');
   }
-  likeCountSpan.textContent = likesCount;
+  likeCountSpan.textContent = likesCount; 
 }
 export function removeCardElement(cardElement) {
   cardElement.remove();

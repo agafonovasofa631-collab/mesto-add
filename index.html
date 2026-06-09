@@ -1,4 +1,39 @@
 <!DOCTYPE html>
+<style>
+  /* Базовые стили */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background-color: #000; color: #fff; font-family: 'Inter', Arial, sans-serif; }
+  .page { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+  .header { border-bottom: 1px solid #545454; padding: 45px 0 41px; margin-bottom: 40px; }
+  .logo { width: 173px; }
+  .profile { display: flex; align-items: center; gap: 30px; margin-bottom: 50px; }
+  .profile__image { width: 120px; height: 120px; border-radius: 50%; background-size: cover; background-position: center; }
+  .profile__info { flex: 1; }
+  .profile__title { font-size: 42px; font-weight: 500; line-height: 1.14; }
+  .profile__description { font-size: 18px; line-height: 1.22; margin-top: 8px; }
+  .profile__edit-button { background: none; border: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>'); background-repeat: no-repeat; width: 24px; height: 24px; margin-left: 18px; }
+  .profile__add-button { background: none; border: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="white" viewBox="0 0 22 22"><path d="M22 10h-8V2h-4v8H2v4h8v8h4v-8h8z"/></svg>'); background-repeat: no-repeat; width: 150px; height: 50px; background-position: center; border: 2px solid white; border-radius: 2px; }
+  .places__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(282px, 1fr)); gap: 20px; list-style: none; padding: 0; }
+  .card { background-color: #fff; border-radius: 10px; overflow: hidden; position: relative; }
+  .card__image { width: 100%; height: 282px; object-fit: cover; cursor: pointer; }
+  .card__title { color: #000; font-size: 24px; line-height: 1.21; margin: 0; }
+  .card__description { display: flex; justify-content: space-between; align-items: center; padding: 25px 20px; }
+  .card__like-button { background: none; border: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="black" viewBox="0 0 22 22"><path d="M11 19.5L2.5 11a5 5 0 0 1 0-7.07 5 5 0 0 1 7.07 0L11 5.36l1.43-1.43a5 5 0 0 1 7.07 0 5 5 0 0 1 0 7.07L11 19.5z"/></svg>'); background-repeat: no-repeat; width: 22px; height: 22px; cursor: pointer; }
+  .card__like-button_is-active { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" viewBox="0 0 22 22"><path d="M11 19.5L2.5 11a5 5 0 0 1 0-7.07 5 5 0 0 1 7.07 0L11 5.36l1.43-1.43a5 5 0 0 1 7.07 0 5 5 0 0 1 0 7.07L11 19.5z"/></svg>'); }
+  .card__control { position: absolute; top: 18px; right: 15px; display: flex; gap: 10px; }
+  .card__control-button_type_delete { background: none; border: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="white" viewBox="0 0 18 20"><path d="M12 2h-2V0H8v2H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg>'); background-repeat: no-repeat; width: 18px; height: 20px; cursor: pointer; }
+  .footer { border-top: 1px solid #545454; padding: 30px 0; margin-top: 50px; text-align: center; }
+  .popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center; }
+  .popup_is-opened { display: flex; }
+  .popup__content { background-color: #fff; color: #000; border-radius: 10px; padding: 34px 36px; max-width: 430px; width: 100%; }
+  .popup__title { font-size: 24px; margin-bottom: 24px; }
+  .popup__input { width: 100%; border: none; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 10px 0; margin-bottom: 30px; font-size: 14px; }
+  .popup__button { background-color: #000; color: #fff; border: none; padding: 14px 0; width: 100%; border-radius: 2px; cursor: pointer; font-size: 18px; }
+  .popup__button_disabled { opacity: 0.5; cursor: not-allowed; }
+  .popup__close { position: absolute; top: -40px; right: -40px; background: none; border: none; cursor: pointer; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" viewBox="0 0 40 40"><path d="M31.6 8.4L28.4 5.2 20 13.6 11.6 5.2 8.4 8.4 16.8 16.8 8.4 25.2 11.6 28.4 20 20 28.4 28.4 31.6 25.2 23.2 16.8z"/></svg>'); background-repeat: no-repeat; width: 40px; height: 40px; }
+  .popup__image { max-width: 80vw; max-height: 80vh; }
+  .popup__caption { color: #fff; font-size: 12px; margin-top: 10px; }
+</style>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +43,6 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./src/pages/index.css">
   </head>
   <body class="page">
     <div class="page__content">
