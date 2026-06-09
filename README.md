@@ -4,4 +4,4 @@
 ![изображение live-server](image.png)
 Live-server является расширением VSCode
 
-https://agafonovasofa631-collab.github.io/mesto-add/
+https://organic-space-spoon-6v99gq4rjgg4f46v7-5175.app.github.dev/mesto-ad/
