@@ -1,4 +1,4 @@
-//import './styles/index.css'; 
+import '../pages/index.css';
 import {
   getUserInfo,
   getCards,
@@ -26,7 +26,7 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileImage = document.querySelector('.profile__image');
 const editProfileModal = document.querySelector('.popup_type_edit');
-const avatarModal = document.querySelector('.popup_type_avatar');
+const avatarModal = document.querySelector('.popup_type_edit-avatar');
 const addCardModal = document.querySelector('.popup_type_new-card');
 const imageModal = document.querySelector('.popup_type_image');
 const removeModal = document.querySelector('.popup_type_remove-card');
